@@ -17,6 +17,11 @@ class CartService
         $this->cartItemRepository = $cartItemRepository;
     }
 
+    /**
+     * @param $productId
+     * @param $quantity
+     * @return void
+     */
     public function addToCart($productId, $quantity)
     {
         $userId = Auth::id();
@@ -29,6 +34,10 @@ class CartService
         $this->cartItemRepository->createCartItem($cart->id, $productId, $quantity);
     }
 
+    /**
+     * @param $productId
+     * @return void
+     */
     public function removeFromCart($productId)
     {
         $userId = Auth::id();

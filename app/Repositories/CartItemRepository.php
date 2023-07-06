@@ -6,6 +6,12 @@ use App\Models\CartItem;
 
 class CartItemRepository
 {
+    /**
+     * @param $cartId
+     * @param $productId
+     * @param $quantity
+     * @return mixed
+     */
     public function createCartItem($cartId, $productId, $quantity)
     {
         return CartItem::create([
@@ -15,6 +21,11 @@ class CartItemRepository
         ]);
     }
 
+    /**
+     * @param $cartId
+     * @param $productId
+     * @return mixed
+     */
     public function deleteCartItem($cartId, $productId)
     {
         return CartItem::where('cart_id', $cartId)

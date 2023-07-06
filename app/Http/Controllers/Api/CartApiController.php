@@ -18,6 +18,10 @@ class CartApiController extends Controller
         $this->cartService = $cartService;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function addToCart(Request $request)
     {
         $this->cartService->addToCart($request->product_id, $request->quantity);
@@ -25,6 +29,10 @@ class CartApiController extends Controller
         return response()->json(['message' => 'Item added to cart']);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function removeFromCart(Request $request)
     {
         $this->cartService->removeFromCart($request->product_id);
@@ -32,6 +40,10 @@ class CartApiController extends Controller
         return response()->json(['message' => 'Item removed from cart']);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getCartItems(Request $request)
     {
         $user = $request->user();
