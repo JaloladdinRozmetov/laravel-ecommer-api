@@ -24,11 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 });
+
 Route::group(['prefix' => 'products','as' => 'product.','middleware' => ["auth:sanctum"]], function () {
     Route::get('/', [ProductApiController::class, 'index'])->name('index');
     Route::post('/', [ProductApiController::class, 'store'])->name('store');
@@ -36,7 +35,9 @@ Route::group(['prefix' => 'products','as' => 'product.','middleware' => ["auth:s
     Route::put('/{id}', [ProductApiController::class, 'update'])->name('update');
     Route::delete('/{id}', [ProductApiController::class, 'destroy'])->name('destroy');
 });
+// route for searching by name of products
 Route::post('/search',[ProductApiController::class,'search'])->name('product.search')->middleware('auth:sanctum');
+
 Route::group(['prefix' => 'category','as' => 'category.','middleware' => ["auth:sanctum"]], function () {
     Route::get('/', [CategoryApiController::class, 'index'])->name('index');
     Route::post('/', [CategoryApiController::class, 'store'])->name('store');
@@ -44,6 +45,7 @@ Route::group(['prefix' => 'category','as' => 'category.','middleware' => ["auth:
     Route::put('/{id}', [CategoryApiController::class, 'update'])->name('update');
     Route::delete('/{id}', [CategoryApiController::class, 'destroy'])->name('destroy');
 });
+
 Route::group(['prefix' => 'cart','as' => 'cart.','middleware' => ["auth:sanctum"]],function (){
     Route::post('/add', [CartApiController::class, 'addToCart'])->name('add');
     Route::post('/remove', [CartApiController::class, 'removeFromCart'])->name('remove');
