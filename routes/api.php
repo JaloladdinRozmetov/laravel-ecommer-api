@@ -30,20 +30,20 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::group(['prefix' => 'products','as' => 'product.','middleware' => ["auth:sanctum"]], function () {
     Route::get('/', [ProductApiController::class, 'index'])->name('index');
-    Route::post('/', [ProductApiController::class, 'store'])->name('store');
+    Route::post('/', [ProductApiController::class, 'store'])->name('store')->middleware('admin');
     Route::get('/{id}', [ProductApiController::class, 'show'])->name('show');
-    Route::put('/{id}', [ProductApiController::class, 'update'])->name('update');
-    Route::delete('/{id}', [ProductApiController::class, 'destroy'])->name('destroy');
+    Route::put('/{id}', [ProductApiController::class, 'update'])->name('update')->middleware('admin');
+    Route::delete('/{id}', [ProductApiController::class, 'destroy'])->name('destroy')->middleware('admin');
 });
 // route for searching by name of products
 Route::post('/search',[ProductApiController::class,'search'])->name('product.search')->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'category','as' => 'category.','middleware' => ["auth:sanctum"]], function () {
     Route::get('/', [CategoryApiController::class, 'index'])->name('index');
-    Route::post('/', [CategoryApiController::class, 'store'])->name('store');
+    Route::post('/', [CategoryApiController::class, 'store'])->name('store')->middleware('admin');
     Route::get('/{id}', [CategoryApiController::class, 'show'])->name('show');
-    Route::put('/{id}', [CategoryApiController::class, 'update'])->name('update');
-    Route::delete('/{id}', [CategoryApiController::class, 'destroy'])->name('destroy');
+    Route::put('/{id}', [CategoryApiController::class, 'update'])->name('update')->middleware('admin');
+    Route::delete('/{id}', [CategoryApiController::class, 'destroy'])->name('destroy')->middleware('admin');
 });
 
 Route::group(['prefix' => 'cart','as' => 'cart.','middleware' => ["auth:sanctum"]],function (){
