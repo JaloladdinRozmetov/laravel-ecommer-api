@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
         // Run the ProductSeeder
         $this->call(ProductsTableSeeder::class);
+        $this->call(UserSeeder::class);
 
     }
 }

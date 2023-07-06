@@ -34,3 +34,13 @@ $ docker exec -it php.ecom php artisan migrate
 ```bash
 $ docker exec -it php.ecom php artisan DB:seed
 ```
+### Открываем Postman или Insomnia или любую другую программу для проверки API
+```
+method:post
+http://localhost:8098/api/login
+body:{
+"email":"admin@gmail.com",
+"password":"password"
+}
+отправляем и получаем токен логина
+```
